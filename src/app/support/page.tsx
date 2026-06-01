@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Card } from "../components/Card";
 import { PageHeader } from "../components/PageHeader";
-import { ArrowUpRightIcon, CoffeeIcon, HeartIcon } from "../components/Icon";
+import { ArrowUpRightIcon, KofiIcon, LiberapayIcon } from "../components/Icon";
 import { site } from "../data/site";
 
 export const metadata: Metadata = {
@@ -20,41 +20,39 @@ export default function SupportPage() {
 
       <div className="grid gap-6 md:grid-cols-2 pb-16 md:pb-24">
         <Card bordered className="flex flex-col">
-          <HeartIcon className="h-5 w-5 text-mauve" />
+          <LiberapayIcon className="h-5 w-5 text-yellow" />
           <h3 className="mt-4 text-lg font-semibold text-text">
-            Sponsor on GitHub
+            Liberapay
           </h3>
           <p className="mt-2 text-subtext-1 leading-relaxed">
-            Recurring sponsorship directly funds the open-source work I do in
-            public. Pick a tier or set a custom amount.
+            Recurring support for the open-source work I do in public. Run by
+            a non-profit, transparent, and fee-free.
           </p>
           <a
-            href={site.support.github}
+            href={site.support.liberapay}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 self-start text-lavender hover:text-blue transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60 rounded"
           >
-            Become a sponsor
+            Donate on Liberapay
             <ArrowUpRightIcon className="h-4 w-4" />
           </a>
         </Card>
 
         <Card className="flex flex-col">
-          <CoffeeIcon className="h-5 w-5 text-peach" />
-          <h3 className="mt-4 text-lg font-semibold text-text">
-            Buy me a coffee
-          </h3>
+          <KofiIcon className="h-5 w-5 text-peach" />
+          <h3 className="mt-4 text-lg font-semibold text-text">Ko-fi</h3>
           <p className="mt-2 text-subtext-1 leading-relaxed">
             A one-off tip for a piece of writing or a tool that saved you time.
             No tiers, no commitment.
           </p>
           <a
-            href={site.support.coffee}
+            href={site.support.kofi}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 self-start text-lavender hover:text-blue transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60 rounded"
           >
-            Tip once
+            Tip on Ko-fi
             <ArrowUpRightIcon className="h-4 w-4" />
           </a>
         </Card>

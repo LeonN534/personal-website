@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "../data/site";
-import { GithubIcon, LinkedinIcon, RssIcon } from "./SocialIcons";
+import { GithubIcon, LinkedinIcon } from "./SocialIcons";
 
 export function Nav() {
   const pathname = usePathname();
@@ -29,10 +29,10 @@ export function Nav() {
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`cursor-pointer rounded-full px-3 py-1.5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60 ${
+                  className={`cursor-pointer rounded-full px-3 py-1.5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/50 ${
                     active
-                      ? "nav-link-active"
-                      : "text-subtext-1 hover:text-text"
+                      ? "bg-surface-0/70 ring-1 ring-lavender/20 nav-link-active"
+                      : "text-subtext-1 hover:text-text hover:bg-surface-0/30"
                   }`}
                 >
                   {item.label}
@@ -63,17 +63,6 @@ export function Nav() {
               className="cursor-pointer inline-flex h-8 w-8 items-center justify-center rounded-full text-subtext-1 hover:text-text transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60"
             >
               <LinkedinIcon className="h-4 w-4" />
-            </a>
-          </li>
-          <li>
-            <a
-              href={site.socials.rss}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="RSS feed"
-              className="cursor-pointer inline-flex h-8 w-8 items-center justify-center rounded-full text-subtext-1 hover:text-text transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60"
-            >
-              <RssIcon className="h-4 w-4" />
             </a>
           </li>
         </ul>

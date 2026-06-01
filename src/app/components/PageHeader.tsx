@@ -14,7 +14,7 @@ export function PageHeader({ title, subtitle, meta }: PageHeaderProps) {
           {meta}
         </p>
       ) : null}
-      <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+      <h1 className="text-4xl md:text-5xl 2xl:text-6xl font-semibold tracking-tight">
         <GradientText>{title}</GradientText>
       </h1>
       {subtitle ? (

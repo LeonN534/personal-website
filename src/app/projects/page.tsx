@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <div className="mx-auto max-w-5xl xl:max-w-6xl px-6">
       <PageHeader
         meta="Selected work"
         title="Projects"
         subtitle="A small, opinionated collection of things I've built. Side projects, tools, and the occasional experiment."
       />
 
-      <div className="grid gap-6 md:grid-cols-2 pb-16 md:pb-24">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 pb-16 md:pb-24">
         {projects.map((p) => {
           const link = p.link ?? p.repo;
           const Wrapper = link ? "a" : "div";

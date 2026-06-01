@@ -1,33 +1,47 @@
 import type { Metadata } from "next";
 import { Card } from "../components/Card";
+import { CopyButton } from "../components/CopyButton";
 import { PageHeader } from "../components/PageHeader";
-import { GithubIcon, LinkedinIcon, RssIcon } from "../components/SocialIcons";
-import { site } from "../data/site";
+import {
+  DiscordIcon,
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  SpotifyIcon,
+  TiktokIcon,
+  WechatIcon,
+  YoutubeIcon,
+} from "../components/SocialIcons";
+import { site, type Site } from "../data/site";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "The best ways to get in touch.",
 };
 
-const socials = [
-  {
-    label: "GitHub",
-    href: site.socials.github,
-    Icon: GithubIcon,
-  },
-  {
-    label: "LinkedIn",
-    href: site.socials.linkedin,
-    Icon: LinkedinIcon,
-  },
-  {
-    label: "RSS",
-    href: site.socials.rss,
-    Icon: RssIcon,
-  },
-] as const;
+type IconComponent = (props: { className?: string }) => React.JSX.Element;
+
+type Platform = {
+  key: keyof Site["socials"];
+  label: string;
+  Icon: IconComponent;
+  mode?: "link" | "copy";
+};
+
+const platforms: Platform[] = [
+  { key: "github", label: "GitHub", Icon: GithubIcon },
+  { key: "linkedin", label: "LinkedIn", Icon: LinkedinIcon },
+  { key: "instagram", label: "Instagram", Icon: InstagramIcon },
+  { key: "discord", label: "Discord", Icon: DiscordIcon, mode: "copy" },
+  { key: "youtube", label: "YouTube", Icon: YoutubeIcon },
+  { key: "tiktok", label: "TikTok", Icon: TiktokIcon },
+  { key: "spotify", label: "Spotify", Icon: SpotifyIcon },
+  { key: "wechat", label: "WeChat", Icon: WechatIcon },
+];
 
 export default function ContactPage() {
+  const enabled = platforms.filter((p) => site.socials[p.key]);
+
   return (
     <div className="mx-auto max-w-3xl px-6">
       <PageHeader
@@ -56,18 +70,26 @@ export default function ContactPage() {
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-overlay-1">
           Elsewhere
         </p>
-        <ul className="mt-4 grid gap-2 sm:grid-cols-3">
-          {socials.map(({ label, href, Icon: Svg }) => (
-            <li key={label}>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-white/5 bg-surface-0/40 px-4 py-3 text-subtext-1 hover:text-text hover:border-lavender/30 transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60"
-              >
-                <Svg className="h-4 w-4" />
-                <span className="text-sm">{label}</span>
-              </a>
+        <ul className="mt-4 grid gap-2 grid-cols-2 md:grid-cols-4">
+          {enabled.map(({ key, label, Icon: Svg, mode }) => (
+            <li key={key}>
+              {mode === "copy" ? (
+                <CopyButton
+                  value={site.socials[key] as string}
+                  label={label}
+                  icon={<Svg className="h-4 w-4 shrink-0" />}
+                />
+              ) : (
+                <a
+                  href={site.socials[key]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-white/5 bg-surface-0/40 px-4 py-3 text-subtext-1 hover:text-text hover:border-lavender/30 transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60"
+                >
+                  <Svg className="h-4 w-4 shrink-0" />
+                  <span className="text-sm truncate">{label}</span>
+                </a>
+              )}
             </li>
           ))}
         </ul>
