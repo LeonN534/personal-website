@@ -154,6 +154,6 @@ export const projects: Project[] = [
     repo: "https://github.com/LeonN534/personal-website",
     route: false,
     link: "https://leonardoromero.xyz",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/1280px-Tic_tac_toe.svg.png",
+    logo: "https://raw.githubusercontent.com/LeonN534/personal-website/refs/heads/main/public/personal-logo.png",
   },
 ];
