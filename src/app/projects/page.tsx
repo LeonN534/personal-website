@@ -2,10 +2,39 @@ import type { Metadata } from "next";
 import { PageHeader } from "../components/PageHeader";
 import { ProjectCard } from "../components/ProjectCard";
 import { projects } from "../data/projects";
+import { site } from "../data/site";
+
+const siteUrl = "https://www.leonardoromero.xyz";
+const logoPath = "/personal-logo.png";
 
 export const metadata: Metadata = {
   title: "Projects",
   description: "A selection of things I've built.",
+  alternates: {
+    canonical: "/projects",
+  },
+  openGraph: {
+    type: "website",
+    title: `Projects · ${site.name}`,
+    description: "A selection of things I've built.",
+    url: `${siteUrl}/projects`,
+    siteName: site.name,
+    locale: "en_US",
+    images: [
+      {
+        url: logoPath,
+        width: 512,
+        height: 512,
+        alt: `${site.name} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Projects · ${site.name}`,
+    description: "A selection of things I've built.",
+    images: [logoPath],
+  },
 };
 
 export default function ProjectsPage() {

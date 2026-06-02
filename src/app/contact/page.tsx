@@ -14,9 +14,37 @@ import {
 } from "../components/SocialIcons";
 import { site, type Site } from "../data/site";
 
+const siteUrl = "https://www.leonardoromero.xyz";
+const logoPath = "/personal-logo.png";
+
 export const metadata: Metadata = {
   title: "Contact",
   description: "The best ways to get in touch.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    type: "website",
+    title: `Contact · ${site.name}`,
+    description: "The best ways to get in touch.",
+    url: `${siteUrl}/contact`,
+    siteName: site.name,
+    locale: "en_US",
+    images: [
+      {
+        url: logoPath,
+        width: 512,
+        height: 512,
+        alt: `${site.name} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contact · ${site.name}`,
+    description: "The best ways to get in touch.",
+    images: [logoPath],
+  },
 };
 
 type IconComponent = (props: { className?: string }) => React.JSX.Element;

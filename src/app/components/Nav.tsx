@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "../data/site";
@@ -16,9 +17,18 @@ export function Nav() {
       <div className="flex items-center justify-between gap-4 rounded-full border border-white/5 bg-base/70 px-4 py-2 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
         <Link
           href="/"
-          className="font-semibold text-sm tracking-tight text-text hover:text-lavender transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60 rounded-full px-2"
+          aria-label={`${site.name} — Home`}
+          className="inline-flex items-center gap-2 rounded-full px-2 py-1 hover:opacity-80 transition-opacity duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lavender/60"
         >
-          <span className="text-gradient">{site.name}</span>
+          <Image
+            src="/personal-logo.png"
+            alt=""
+            width={28}
+            height={28}
+            priority
+            className="h-7 w-7 rounded-md"
+          />
+          <span className="sr-only">{site.name}</span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-1 text-sm">

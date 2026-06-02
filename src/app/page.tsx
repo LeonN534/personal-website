@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "./components/Card";
 import { GradientText } from "./components/GradientText";
@@ -25,6 +26,38 @@ import {
 } from "./components/Icon";
 import { site } from "./data/site";
 import { getAllArticles } from "./lib/articles";
+
+const siteUrl = "https://www.leonardoromero.xyz";
+const logoPath = "/personal-logo.png";
+
+export const metadata: Metadata = {
+  description: site.tagline,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    title: site.name,
+    description: site.tagline,
+    url: siteUrl,
+    siteName: site.name,
+    locale: "en_US",
+    images: [
+      {
+        url: logoPath,
+        width: 512,
+        height: 512,
+        alt: `${site.name} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.name,
+    description: site.tagline,
+    images: [logoPath],
+  },
+};
 
 const quickLinks = [
   {
@@ -128,7 +161,64 @@ export default function Home() {
   const latest = allArticles.slice(0, 3);
   const hasArticles = allArticles.length > 0;
 
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.name,
+    url: siteUrl,
+    email: site.email,
+    image: `${siteUrl}${logoPath}`,
+    description: site.tagline,
+    jobTitle: "Software Engineer",
+    knowsAbout: [
+      "UI/UX design",
+      "Photo and video editing",
+      "JavaScript",
+      "TypeScript",
+      "React Native",
+      "Expo",
+      "Electron",
+      "Next.js",
+      "Nest.js",
+      "Socket.io",
+      "LLM integration",
+      "MCP",
+      "Linux",
+      "AWS",
+      "Docker",
+      "NGINX",
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Cybersecurity",
+      "Networking",
+      "Project management",
+    ],
+    sameAs: Object.values(site.socials).filter(
+      (v): v is string => typeof v === "string" && v.length > 0,
+    ),
+    workLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "PE",
+      },
+    },
+    knowsLanguage: [
+      { "@type": "Language", name: "English" },
+      { "@type": "Language", name: "Spanish" },
+    ],
+  };
+
+  const safeStringify = (value: unknown) =>
+    JSON.stringify(value).replace(/</g, "\\u003c");
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeStringify(personJsonLd) }}
+      />
     <div className="mx-auto max-w-5xl px-6">
       <section className="pt-8 md:pt-16 pb-16 md:pb-24">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-overlay-1 mb-5">
@@ -339,5 +429,6 @@ export default function Home() {
         )}
       </section>
     </div>
+    </>
   );
 }

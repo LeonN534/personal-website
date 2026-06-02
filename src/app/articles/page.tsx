@@ -2,11 +2,40 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "../components/Card";
 import { PageHeader } from "../components/PageHeader";
+import { site } from "../data/site";
 import { getAllArticles } from "../lib/articles";
+
+const siteUrl = "https://www.leonardoromero.xyz";
+const logoPath = "/personal-logo.png";
 
 export const metadata: Metadata = {
   title: "Articles",
   description: "Essays and notes on building, writing, and the quiet web.",
+  alternates: {
+    canonical: "/articles",
+  },
+  openGraph: {
+    type: "website",
+    title: `Articles · ${site.name}`,
+    description: "Essays and notes on building, writing, and the quiet web.",
+    url: `${siteUrl}/articles`,
+    siteName: site.name,
+    locale: "en_US",
+    images: [
+      {
+        url: logoPath,
+        width: 512,
+        height: 512,
+        alt: `${site.name} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Articles · ${site.name}`,
+    description: "Essays and notes on building, writing, and the quiet web.",
+    images: [logoPath],
+  },
 };
 
 export default function ArticlesPage() {

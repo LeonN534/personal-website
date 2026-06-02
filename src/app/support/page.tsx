@@ -4,9 +4,37 @@ import { PageHeader } from "../components/PageHeader";
 import { ArrowUpRightIcon, KofiIcon, LiberapayIcon } from "../components/Icon";
 import { site } from "../data/site";
 
+const siteUrl = "https://www.leonardoromero.xyz";
+const logoPath = "/personal-logo.png";
+
 export const metadata: Metadata = {
   title: "Support",
   description: "If my work has been useful, here's how to give back.",
+  alternates: {
+    canonical: "/support",
+  },
+  openGraph: {
+    type: "website",
+    title: `Support · ${site.name}`,
+    description: "If my work has been useful, here's how to give back.",
+    url: `${siteUrl}/support`,
+    siteName: site.name,
+    locale: "en_US",
+    images: [
+      {
+        url: logoPath,
+        width: 512,
+        height: 512,
+        alt: `${site.name} logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Support · ${site.name}`,
+    description: "If my work has been useful, here's how to give back.",
+    images: [logoPath],
+  },
 };
 
 export default function SupportPage() {

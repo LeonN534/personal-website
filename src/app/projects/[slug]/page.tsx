@@ -29,6 +29,9 @@ export function generateStaticParams() {
 
 type Params = { slug: string };
 
+const siteUrl = "https://www.leonardoromero.xyz";
+const defaultLogo = "/personal-logo.png";
+
 export function generateMetadata({
   params,
 }: {
@@ -36,9 +39,32 @@ export function generateMetadata({
 }): Metadata {
   const p = getProjectBySlug(params.slug);
   if (!p) return { title: "Project not found" };
+  const ogImage = p.logo ?? defaultLogo;
+  const isExternalOg = ogImage.startsWith("http");
+  const ogImageObject = isExternalOg
+    ? { url: ogImage, alt: `${p.title} logo` }
+    : { url: ogImage, width: 512, height: 512, alt: `${p.title} logo` };
   return {
-    title: `${p.title} — Projects`,
+    title: p.title,
     description: p.description,
+    alternates: {
+      canonical: `/projects/${p.slug}`,
+    },
+    openGraph: {
+      type: "article",
+      title: p.title,
+      description: p.description,
+      url: `${siteUrl}/projects/${p.slug}`,
+      siteName: "Leonardo Romero",
+      locale: "en_US",
+      images: [ogImageObject],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: p.title,
+      description: p.description,
+      images: [ogImage],
+    },
   };
 }
 
